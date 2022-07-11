@@ -49,13 +49,16 @@
 
             </div>
 
-            <template v-if="curItem.main_image">
-              <div class="img-wrap">
-                <img :src="`https://lensdata.b-cdn.net/img/${curItem.main_image}`" />
-              </div>
-            </template>
 
             <div class="wdgt-content p-3">
+
+              <template v-if="curItem.main_image">
+                <div class="img-wrap">
+                  <img :src="`https://lensdata.b-cdn.net/img/${curItem.main_image}`" />
+                </div>
+              </template>
+
+
 
               <table class="table table-striped table-hover">
                 <tbody>
@@ -121,6 +124,8 @@
                   <strong>Note:</strong> {{curItem.notes}}
                 </div>
               </template>
+
+              <br><br><br>
 
             </div>
 
@@ -222,6 +227,10 @@ a.list-group-item:hover {
   height: 500px;
   overflow: hidden;
   overflow-y: auto;
+}
+
+.detail .wdgt-content {
+  height: 565px;
 }
 
 .wdgt-toolbar span {
