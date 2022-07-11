@@ -131,7 +131,7 @@ a.list-group-item:hover {
 }
 
 .wdgt-content {
-  height: 400px;
+  height: 500px;
   overflow: hidden;
   overflow-y: auto;
 }
