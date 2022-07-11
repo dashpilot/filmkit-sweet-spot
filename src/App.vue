@@ -69,7 +69,7 @@
     </div>
 
 
-    <div class="text-center" id="footer">Made by <a href="https://www.filmkit.net">Filmkit</a></div>
+    <div class="text-center wdgt-footer">Made by <a href="https://www.filmkit.net">Filmkit</a></div>
 
 
 
@@ -208,6 +208,12 @@ a.list-group-item:hover {
 .list-group-item {
   border: 2px solid black;
 }
+
+.wdgt-footer {
+  padding: 10px;
+  border-top: 2px solid black;
+}
+
 
 @media only screen and (max-width: 770px) {
   .wdgt-side {
