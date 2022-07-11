@@ -9,21 +9,53 @@
         Filmkit Lens Sweet Spot
       </div>
 
-      <div class="wdgt-searchbar">
-        <input type="text" class="form-control" placeholder="Search" v-model="searchTerm" @keyup="search()">
-      </div>
+
+      <div class="wdgt-screen">
 
 
-      <div class="wdgt-content p-3">
-        <ul class="list-group">
-          <template v-for="item in selection">
-            <a class="list-group-item" @click="curItem = item">{{item.title}}</a>
+        <div class="wdgt-searchbar">
+          <input type="text" class="form-control" placeholder="Search" v-model="searchTerm" @keyup="search()">
+        </div>
+
+
+        <div class="wdgt-content p-3">
+          <ul class="list-group">
+            <template v-for="item in selection">
+              <a class="list-group-item" @click="curItem = item">{{item.title}}</a>
+            </template>
+          </ul>
+        </div>
+
+
+        <div class="detail" :class="{'show' : curItem}">
+
+          <template v-if="curItem">
+
+            <div class="wdgt-searchbar">
+
+              <i class="fas fa-chevron-left" @click="curItem = null"></i>
+
+              <h4>Canon EF {{curItem.title}}</h4>
+
+            </div>
+
+            <div class="wdgt-content p-3">
+
+
+
+              <br>
+              <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
+              <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
+
+              <strong>Sweet Spot:</strong> f/{{curItem.ff_corner_sharpness}}
+            </div>
+
           </template>
-        </ul>
+
+        </div>
+
+
       </div>
-
-
-
 
     </div>
 
@@ -32,39 +64,6 @@
 
 
 
-    <!--
-<div class="col-md-6  wdgt-side">
-
-  <div class="wdgt">
-    <div class="wdgt-toolbar">Lens info</div>
-
-    <div class="wdgt-body">
-
-      <template v-if="curItem">
-        <h5>Canon EF</h5>
-        <h4>{{curItem.title}}</h4>
-
-        <br>
-        <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
-        <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
-
-        <strong>Sweet Spot:</strong> f/{{curItem.ff_corner_sharpness}}
-</template>
-
-
-
-    </div>
-
-    <div class="wdgt-footer">
-
-
-    </div>
-
-  </div>
-
-
-</div>
--->
 
   </main>
 </div>
@@ -111,6 +110,7 @@ export default {
   padding: 15px;
   padding-bottom: 0;
   border-bottom: 2px solid black;
+  height: 69px;
 }
 
 .wdgt-side {
@@ -132,10 +132,42 @@ a.list-group-item:hover {
   overflow-y: auto;
 }
 
-h5 {
-  text-transform: uppercase;
-  font-size: 19px;
-  margin-bottom: 3px;
+h4 {
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+h4 {
+  text-align: center;
+}
+
+.wdgt-screen {
+  position: relative;
+}
+
+.detail {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: -100%;
+}
+
+.show {
+  transition: .7s;
+  right: 0%;
+}
+
+.fa-chevron-left {
+  float: left;
+  font-size: 22px;
+  margin-top: 6px;
+}
+
+.fa-chevron-left:hover {
+  color: blue;
+  cursor: pointer;
 }
 
 
