@@ -22,6 +22,13 @@
 
 
         <div class="wdgt-content p-3">
+
+          <template v-if="loading">
+            <div class="loading pt-3">
+              <div class="fas fa-spinner fa-spin"></div>
+            </div>
+          </template>
+
           <ul class="list-group">
             <template v-for="item in selection">
               <a class="list-group-item" @click="curItem = item">Canon EF {{item.title}}</a>
@@ -53,10 +60,10 @@
               <table class="table table-striped table-hover">
                 <tbody>
                   <tr>
-                    <td>
+                    <td class="w-50">
                       <strong>Center Sharpness<template v-if="curItem.tele"> @{{curItem.wide}}mm</template>:</strong>
                     </td>
-                    <td>
+                    <td class="w-50">
                       f/{{curItem.wide_center_sharpness}}
                     </td>
                   </tr>
@@ -99,7 +106,11 @@
                 </tbody>
               </table>
 
-
+              <template v-if="curItem.notes">
+                <div class="alert alert-warning">
+                  <strong>Note:</strong> {{curItem.notes}}
+                </div>
+              </template>
 
             </div>
 
@@ -128,6 +139,7 @@ export default {
   components: {},
   data() {
     return {
+      loading: true,
       items: [],
       selection: [],
       searchTerm: null,
@@ -141,6 +153,8 @@ export default {
       .then(response => response.json())
       .then(data => {
         console.log(data)
+        this.loading = false;
+
         let myitems = data.categories.filter(x => x.slug == 'canon-ef')[0]
         localStorage.setItem('items', JSON.stringify(myitems.posts));
 
@@ -149,6 +163,8 @@ export default {
 
         this.items = myitems.posts;
         this.selection = myitems.posts;
+
+
       });
   },
   methods: {
@@ -257,5 +273,9 @@ a.list-group-item:hover {
 .wdgt-footer {
   padding: 10px;
   border-top: 2px solid black;
+}
+
+.loading {
+  text-align: center;
 }
 </style>
