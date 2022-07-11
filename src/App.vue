@@ -139,9 +139,6 @@ a.list-group-item:hover {
 h4 {
   margin-top: 5px;
   font-size: 18px;
-}
-
-h4 {
   text-align: center;
 }
 
@@ -179,6 +176,7 @@ h4 {
 }
 
 .img-wrap img {
+  display: block;
   width: 300px;
   margin: 0 auto;
   margin-bottom: 20px;
