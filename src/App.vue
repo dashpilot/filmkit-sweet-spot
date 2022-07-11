@@ -93,6 +93,16 @@
                       </td>
                     </tr>
                   </template>
+                  <template v-if="curItem.diffraction">
+                    <tr>
+                      <td>
+                        <strong>Diffraction:</strong>
+                      </td>
+                      <td>
+                        f/{{curItem.diffraction}}
+                      </td>
+                    </tr>
+                  </template>
                   <template v-if="curItem.filter_size">
                     <tr>
                       <td>
