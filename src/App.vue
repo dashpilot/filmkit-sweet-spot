@@ -126,8 +126,6 @@ main {
   background-color: #F8F8F8;
 }
 
-
-
 .wdgt-searchbar {
   padding: 15px;
   padding-bottom: 0;
@@ -212,12 +210,5 @@ a.list-group-item:hover {
 .wdgt-footer {
   padding: 10px;
   border-top: 2px solid black;
-}
-
-
-@media only screen and (max-width: 770px) {
-  .wdgt-side {
-    border-left: 0;
-  }
 }
 </style>
