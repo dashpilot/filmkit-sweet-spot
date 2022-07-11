@@ -24,7 +24,7 @@
         <div class="wdgt-content p-3">
           <ul class="list-group">
             <template v-for="item in selection">
-              <a class="list-group-item" @click="curItem = item">{{item.title}}</a>
+              <a class="list-group-item" @click="curItem = item">Canon EF {{item.title}}</a>
             </template>
           </ul>
         </div>
