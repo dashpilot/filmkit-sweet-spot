@@ -5,12 +5,15 @@
 
 
     <div class="wdgt wdgt-main">
-      <div class="wdgt-toolbar">
-        Filmkit Lens Sweet Spot
-      </div>
-
 
       <div class="wdgt-screen">
+
+        <div class="wdgt-toolbar">
+          Filmkit Lens Sweet Spot
+        </div>
+
+
+
 
 
         <div class="wdgt-searchbar">
@@ -31,21 +34,23 @@
 
           <template v-if="curItem">
 
-            <div class="wdgt-searchbar">
+            <div class="wdgt-toolbar">
 
               <i class="fas fa-chevron-left" @click="curItem = null"></i>
 
-              <h4>Canon EF {{curItem.title}}</h4>
+              <span>Canon EF {{curItem.title}}</span>
 
             </div>
 
+            <template v-if="curItem.main_image">
+              <div class="img-wrap">
+                <img :src="`https://lensdata.b-cdn.net/img/${curItem.main_image}`" />
+              </div>
+            </template>
+
             <div class="wdgt-content p-3">
 
-              <template v-if="curItem.main_image">
-                <div class="img-wrap">
-                  <img :src="`https://lensdata.b-cdn.net/img/${curItem.main_image}`" />
-                </div>
-              </template>
+
 
               <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
               <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
@@ -136,9 +141,8 @@ a.list-group-item:hover {
   overflow-y: auto;
 }
 
-h4 {
-  margin-top: 5px;
-  font-size: 18px;
+.wdgt-toolbar span {
+
   text-align: center;
 }
 
@@ -162,8 +166,8 @@ h4 {
 
 .fa-chevron-left {
   float: left;
-  font-size: 22px;
-  margin-top: 6px;
+
+  margin-top: 3px;
 }
 
 .fa-chevron-left:hover {
@@ -173,6 +177,7 @@ h4 {
 
 .img-wrap {
   clear: both;
+  border-bottom: 2px solid black;
 }
 
 .img-wrap img {
