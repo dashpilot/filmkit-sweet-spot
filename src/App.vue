@@ -41,14 +41,18 @@
 
             <div class="wdgt-content p-3">
 
+              <template v-if="curItem.main_image">
+                <div class="img-wrap">
+                  <img :src="`https://lensdata.b-cdn.net/img/${curItem.main_image}`" />
+                </div>
+              </template>
 
-
-              <br>
               <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
               <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
 
               <strong>Sweet Spot:</strong> f/{{curItem.ff_corner_sharpness}}
             </div>
+
 
           </template>
 
@@ -170,6 +174,15 @@ h4 {
   cursor: pointer;
 }
 
+.img-wrap {
+  clear: both;
+}
+
+.img-wrap img {
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
 
 @media only screen and (max-width: 770px) {
   .wdgt-side {
