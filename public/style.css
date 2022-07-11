@@ -1,0 +1,148 @@
+#main{
+	font-family: Montserrat,sans-serif;
+	overflow: hidden;
+	background-color: white;
+}
+
+label{
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 14px;
+}
+
+.form-control{
+  margin-bottom: 15px;
+}
+
+.wdgt{
+  margin-bottom: 15px;
+}
+
+.wdgt-main{
+	border-right: 0;
+	margin-bottom: 0;
+}
+
+.wdgt-side{
+	border-left: 0;
+
+}
+
+.col-md-4{
+	border-left: 2px solid black;
+
+}
+
+
+.wdgt-toolbar{
+  padding: 10px;
+  border-bottom: 2px solid black;
+  text-align: center;
+	background-color: #F8F8F8;
+	font-family: Montserrat,sans-serif;
+}
+
+
+.wdgt-body{
+  padding: 20px;
+}
+
+.wdgt-footer{
+	padding: 20px;
+	padding-top: 0;
+}
+
+.wdgt canvas {
+  width: 100%;
+  object-fit: contain;
+  margin-top: -1px;
+  margin-bottom: -7px;
+}
+
+.btn{
+  border: 2px solid black;
+	font-family: Montserrat,sans-serif;
+}
+
+.btn-group .btn:last-child{
+  border-left: 0;
+}
+
+#footer{
+	height: 50px;
+	border-top: 2px solid black;
+	padding-top: 10px;
+	background-color: white;
+}
+
+/* --- range sliders --- */
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+margin-top:1px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+/* thumb */
+input[type=range]::-moz-range-thumb {
+    -webkit-appearance: none;
+  border: 2px solid black;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  display: block;
+
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+border: 2px solid black;
+height: 20px;
+width: 20px;
+border-radius: 50%;
+background: white;
+cursor: pointer;
+display: block;
+
+}
+
+@media only screen and (max-width: 770px) {
+  header{
+    padding-top: 20px;
+		padding-bottom: 0px;
+  }
+	.bg{
+		height: 500px;
+	}
+	.label{
+		display: none;
+	}
+
+	.col-md-4 {
+		border-left: 0 !important;
+	}
+}
+
+
+@media only screen and (max-width: 750px) {
+	.label{
+		display: inline;
+	}
+
+	.wdgt-side{
+		border-top: 2px solid black;
+	}
+
+
+}
