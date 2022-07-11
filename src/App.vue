@@ -167,7 +167,7 @@ a.list-group-item:hover {
 .fa-chevron-left {
   float: left;
 
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 .fa-chevron-left:hover {
@@ -178,6 +178,7 @@ a.list-group-item:hover {
 .img-wrap {
   clear: both;
   border-bottom: 2px solid black;
+  padding-top: 15px;
 }
 
 .img-wrap img {
@@ -185,6 +186,14 @@ a.list-group-item:hover {
   width: 300px;
   margin: 0 auto;
   margin-bottom: 20px;
+}
+
+.form-control {
+  border: 2px solid black;
+}
+
+.list-group-item {
+  border: 2px solid black;
 }
 
 @media only screen and (max-width: 770px) {
