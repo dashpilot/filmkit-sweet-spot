@@ -50,12 +50,57 @@
 
             <div class="wdgt-content p-3">
 
+              <table class="table table-striped table-hover">
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Center Sharpness<template v-if="curItem.tele"> @{{curItem.wide}}mm</template>:</strong>
+                    </td>
+                    <td>
+                      f/{{curItem.wide_center_sharpness}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong>Corner Sharpness<template v-if="curItem.tele"> @{{curItem.wide}}mm</template>:</strong>
+                    </td>
+                    <td>
+                      f/{{curItem.wide_corner_sharpness}}
+                    </td>
+                  </tr>
+                  <template v-if="curItem.tele">
+                    <tr>
+                      <td>
+                        <strong>Center sharpness @{{curItem.tele}}mm:</strong>
+                      </td>
+                      <td>
+                        f/{{curItem.tele_center_sharpness}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Corner sharpness @{{curItem.tele}}mm:</strong>
+                      </td>
+                      <td>
+                        f/{{curItem.tele_corner_sharpness}}
+                      </td>
+                    </tr>
+                  </template>
+                  <template v-if="curItem.filter_size">
+                    <tr>
+                      <td>
+                        <strong>Filter Size:</strong>
+                      </td>
+                      <td>
+                        {{curItem.filter_size}}mm
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
 
 
-              <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
-              <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
 
-              <strong>Sweet Spot:</strong> f/{{curItem.ff_corner_sharpness}}
             </div>
 
 
@@ -99,7 +144,8 @@ export default {
         let myitems = data.categories.filter(x => x.slug == 'canon-ef')[0]
         localStorage.setItem('items', JSON.stringify(myitems.posts));
 
-        myitems.posts.sort((a, b) => a.title.localeCompare(b.title)).reverse()
+        // sort numerically
+        myitems.posts.sort((a, b) => a.wide - b.wide)
 
         this.items = myitems.posts;
         this.selection = myitems.posts;
@@ -205,6 +251,7 @@ a.list-group-item:hover {
 
 .list-group-item {
   border: 2px solid black;
+  user-select: none;
 }
 
 .wdgt-footer {
