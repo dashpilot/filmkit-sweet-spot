@@ -4,40 +4,53 @@
   <main id="main">
 
     <div class="row g-0">
-      <div class="col-md-8">
+      <div class="col-md-6">
 
 
 
         <div class="wdgt wdgt-main">
           <div class="wdgt-toolbar">
-            Filmkit Aspect Ratio Calculator
+            Filmkit Lens Sweet Spot
+          </div>
+
+          <div class="wdgt-searchbar">
+            <input type="text" class="form-control" placeholder="Search" v-model="searchTerm" @keyup="search()">
+          </div>
+
+
+          <div class="wdgt-content p-3">
+            <ul class="list-group">
+              <template v-for="item in selection">
+                <a class="list-group-item" @click="curItem = item">{{item.title}}</a>
+              </template>
+            </ul>
           </div>
 
 
 
-          <div class="ratio">{{ratio}}</div>
 
         </div>
 
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6  wdgt-side">
 
-        <div class="wdgt wdgt-side">
-          <div class="wdgt-toolbar">Controls</div>
+        <div class="wdgt">
+          <div class="wdgt-toolbar">Lens info</div>
 
           <div class="wdgt-body">
 
-            <label>Original Width</label>
-            <input type="number" class="form-control" v-model="orig_w" @keyup="calculate($event, 'w')">
+            <template v-if="curItem">
+              <h5>Canon EF</h5>
+              <h4>{{curItem.title}}</h4>
 
-            <label>Original Height</label>
-            <input type="number" class="form-control" v-model="orig_h" @keyup="calculate($event, 'h')">
+              <br>
+              <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
+              <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
 
-            <label>New Width</label>
-            <input type="number" class="form-control" v-model="new_w" @keyup="calculate($event, 'w')">
+              <strong>Sweet Spot:</strong> f/{{curItem.ff_corner_sharpness}}
+</template>
 
-            <label>New Height</label>
-            <input type="number" class="form-control" v-model="new_h" @keyup="calculate($event, 'h')">
+
 
           </div>
 
@@ -67,79 +80,70 @@ export default {
   components: {},
   data() {
     return {
-      orig_w: 1920,
-      orig_h: 1080,
-      new_w: null,
-      new_h: null,
-      ratio: "16:9"
+      items: [],
+      selection: [],
+      searchTerm: null,
+      curItem: null,
     }
   },
+  created: function() {
+    fetch('https://lensdata.b-cdn.net/data.json', {
+        cache: "no-store"
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        let myitems = data.categories.filter(x => x.slug == 'canon-ef')[0]
+        localStorage.setItem('items', JSON.stringify(myitems.posts));
+        this.items = myitems.posts;
+        this.selection = myitems.posts;
+      });
+  },
   methods: {
-    calculate($event, trigger) {
-
-      let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
-      if (keyCode < 48 || keyCode > 57) { // 46 is dot
-        $event.preventDefault();
-      }
-
-      let ratio = this.orig_h / this.orig_w;
-      console.log(ratio)
-      console.log(this.new_w)
-
-      if (trigger == "w") {
-        this.new_h = Math.round(this.new_w * ratio);
-      } else {
-        this.new_w = Math.round(this.new_h * ratio);
-      }
-
-      this.setRatio($event);
-
-    },
-    setRatio($event) {
-
-      let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
-      if (keyCode < 48 || keyCode > 57) { // 46 is dot
-        $event.preventDefault();
-      }
-
-      let ratio = this.orig_h / this.orig_w;
-
-      if (ratio == 0.5625 || ratio == 1.7777777777777777) {
-        this.ratio = "16:9";
-      } else if (ratio == 1) {
-        this.ratio = "1:1";
-      } else if (ratio == 0.75 || ratio == 1.3333333333333333) {
-        this.ratio = "4:3";
-      } else if (ratio == 0.6666666666666666 || ratio == 1.5) {
-        this.ratio = "3:2";
-      } else if (ratio == 0.625 || ratio == 1.6) {
-        this.ratio = "16:10";
-      } else if (ratio == 0.5405405405405405 || ratio == 1.85) {
-        this.ratio = "1.85:1";
-      } else if (ratio == 0.41841004184100417 || ratio == 2.39) {
-        this.ratio = "2.39:1";
-      } else {
-        if (Math.round(ratio) == ratio) {
-          this.ratio = ratio + ":1";
-        } else {
-          this.ratio = ratio.toFixed(2) + ":1";
-        }
-      }
-
+    search() {
+      let result = this.items.filter(x => x.title.includes(this.searchTerm))
+      this.selection = result;
     }
-  }
+  },
 }
 </script>
 
 <style>
-.ratio {
-  width: 150px;
-  height: 150px;
-  border: 3px solid black;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 40px;
-  padding-top: 42px;
-  margin: 15% auto;
+.wdgt-searchbar {
+  padding: 15px;
+  padding-bottom: 0;
+  border-bottom: 2px solid black;
+}
+
+.wdgt-side {
+  border-left: 2px solid black;
+}
+
+a.list-group-item {
+  cursor: pointer;
+}
+
+a.list-group-item:hover {
+  background-color: #F8F8F8;
+  color: black;
+}
+
+.wdgt-content {
+  height: 400px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+h5 {
+  text-transform: uppercase;
+  font-size: 19px;
+  margin-bottom: 3px;
+}
+
+
+@media only screen and (max-width: 770px) {
+  .wdgt-side {
+    border-left: 0;
+  }
 }
 </style>
