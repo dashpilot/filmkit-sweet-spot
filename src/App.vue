@@ -167,7 +167,7 @@ a.list-group-item:hover {
 .fa-chevron-left {
   float: left;
 
-  margin-top: 3px;
+  margin-top: 5px;
 }
 
 .fa-chevron-left:hover {
