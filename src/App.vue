@@ -3,73 +3,68 @@
 <div class="wrap">
   <main id="main">
 
-    <div class="row g-0">
-      <div class="col-md-6">
 
-
-
-        <div class="wdgt wdgt-main">
-          <div class="wdgt-toolbar">
-            Filmkit Lens Sweet Spot
-          </div>
-
-          <div class="wdgt-searchbar">
-            <input type="text" class="form-control" placeholder="Search" v-model="searchTerm" @keyup="search()">
-          </div>
-
-
-          <div class="wdgt-content p-3">
-            <ul class="list-group">
-              <template v-for="item in selection">
-                <a class="list-group-item" @click="curItem = item">{{item.title}}</a>
-              </template>
-            </ul>
-          </div>
-
-
-
-
-        </div>
-
-      </div>
-      <div class="col-md-6  wdgt-side">
-
-        <div class="wdgt">
-          <div class="wdgt-toolbar">Lens info</div>
-
-          <div class="wdgt-body">
-
-            <template v-if="curItem">
-              <h5>Canon EF</h5>
-              <h4>{{curItem.title}}</h4>
-
-              <br>
-              <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
-              <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
-
-              <strong>Sweet Spot:</strong> f/{{curItem.ff_corner_sharpness}}
-</template>
-
-
-
-          </div>
-
-          <div class="wdgt-footer">
-
-
-          </div>
-
-        </div>
-
-
+    <div class="wdgt wdgt-main">
+      <div class="wdgt-toolbar">
+        Filmkit Lens Sweet Spot
       </div>
 
-      <div class="text-center" id="footer">Made by <a href="https://www.filmkit.net">Filmkit</a></div>
+      <div class="wdgt-searchbar">
+        <input type="text" class="form-control" placeholder="Search" v-model="searchTerm" @keyup="search()">
+      </div>
+
+
+      <div class="wdgt-content p-3">
+        <ul class="list-group">
+          <template v-for="item in selection">
+            <a class="list-group-item" @click="curItem = item">{{item.title}}</a>
+          </template>
+        </ul>
+      </div>
+
+
+
 
     </div>
 
 
+    <div class="text-center" id="footer">Made by <a href="https://www.filmkit.net">Filmkit</a></div>
 
+
+
+    <!--
+<div class="col-md-6  wdgt-side">
+
+  <div class="wdgt">
+    <div class="wdgt-toolbar">Lens info</div>
+
+    <div class="wdgt-body">
+
+      <template v-if="curItem">
+        <h5>Canon EF</h5>
+        <h4>{{curItem.title}}</h4>
+
+        <br>
+        <strong>Center Sharpness:</strong> f/{{curItem.ff_center_sharpness}}<br>
+        <strong>Corner Sharpness:</strong> f/{{curItem.ff_corner_sharpness}}<br>
+
+        <strong>Sweet Spot:</strong> f/{{curItem.ff_corner_sharpness}}
+</template>
+
+
+
+    </div>
+
+    <div class="wdgt-footer">
+
+
+    </div>
+
+  </div>
+
+
+</div>
+-->
 
   </main>
 </div>
@@ -95,6 +90,9 @@ export default {
         console.log(data)
         let myitems = data.categories.filter(x => x.slug == 'canon-ef')[0]
         localStorage.setItem('items', JSON.stringify(myitems.posts));
+
+        myitems.posts.sort((a, b) => a.title.localeCompare(b.title)).reverse()
+
         this.items = myitems.posts;
         this.selection = myitems.posts;
       });
