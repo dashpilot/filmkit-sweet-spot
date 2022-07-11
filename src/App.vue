@@ -121,7 +121,6 @@ main {
 
 .wdgt-toolbar {
   padding: 10px;
-  padding-bottom: 12px;
   border-bottom: 2px solid black;
   text-align: center;
   background-color: #F8F8F8;
